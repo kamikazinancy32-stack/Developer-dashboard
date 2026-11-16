@@ -4,10 +4,116 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Docs, references, tutorials and tools for front-end developers."
+    />
     <title>Developer Dashboard</title>
   </head>
   <body>
-    <div id="app"></div>
+    <!-- Top bar with the logo and navigation -->
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="logo" href="./">
+          <span class="logo-mark" aria-hidden="true">&lt;/&gt;</span>
+          DevDash
+        </a>
+        <nav aria-label="Main">
+          <a href="#resources">Resources</a>
+          <a
+            href="https://github.com/kamikazinancy32-stack/Developer-dashboard"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero: title, short intro and the search box -->
+      <section class="hero">
+        <div class="container">
+          <h1>Developer Dashboard</h1>
+          <p class="hero-text">
+            Docs, references, tutorials and tools for front-end developers, all
+            in one place.
+          </p>
+
+          <div class="search">
+            <label for="search">Search resources by name</label>
+            <input
+              id="search"
+              type="search"
+              placeholder="Try MDN or Vite"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Category filter, results count and the card grid -->
+      <section id="resources" class="container resources">
+        <div class="filters" role="group" aria-labelledby="filter-label">
+          <span id="filter-label" class="filter-label">Category:</span>
+          <button
+            type="button"
+            class="chip"
+            data-category="All"
+            aria-pressed="true"
+          >
+            All
+          </button>
+          <button
+            type="button"
+            class="chip"
+            data-category="Documentation"
+            aria-pressed="false"
+          >
+            Documentation
+          </button>
+          <button
+            type="button"
+            class="chip"
+            data-category="Reference"
+            aria-pressed="false"
+          >
+            Reference
+          </button>
+          <button
+            type="button"
+            class="chip"
+            data-category="Tutorials"
+            aria-pressed="false"
+          >
+            Tutorials
+          </button>
+          <button
+            type="button"
+            class="chip"
+            data-category="Tools"
+            aria-pressed="false"
+          >
+            Tools
+          </button>
+        </div>
+
+        <p id="count" class="count" aria-live="polite"></p>
+
+        <!-- The cards are added here by src/main.js -->
+        <ul id="resource-list" class="grid"></ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>
+          Built for the FEM08 Tooling &amp; Build Systems lab with Vite, ESLint
+          and Prettier.
+        </p>
+      </div>
+    </footer>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

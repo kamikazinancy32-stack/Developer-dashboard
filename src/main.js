@@ -1,96 +1,93 @@
 import './style.css'
 
-// The developer resources shown on the dashboard
+// The learning resources shown on the dashboard
 const resources = [
   {
-    name: 'MDN Web Docs',
+    name: 'Vite Guide',
     category: 'Documentation',
-    link: 'https://developer.mozilla.org/',
+    description: 'Set up the dev server and build projects for production.',
+    link: 'https://vite.dev/guide/',
   },
   {
-    name: 'Node.js Docs',
+    name: 'npm Docs',
     category: 'Documentation',
-    link: 'https://nodejs.org/docs/latest/api/',
-  },
-  {
-    name: 'GitHub Docs',
-    category: 'Documentation',
-    link: 'https://docs.github.com/',
-  },
-  { name: 'Vite Guide', category: 'Tooling', link: 'https://vite.dev/guide/' },
-  { name: 'npm Docs', category: 'Tooling', link: 'https://docs.npmjs.com/' },
-  {
-    name: 'Yarn Docs',
-    category: 'Tooling',
-    link: 'https://yarnpkg.com/getting-started',
+    description: 'Install packages, manage dependencies and run scripts.',
+    link: 'https://docs.npmjs.com/',
   },
   {
     name: 'ESLint Docs',
-    category: 'Tooling',
+    category: 'Documentation',
+    description: 'Configure rules that catch bugs and bad patterns early.',
     link: 'https://eslint.org/docs/latest/',
   },
   {
     name: 'Prettier Docs',
-    category: 'Tooling',
+    category: 'Documentation',
+    description: 'Format code automatically with a consistent style.',
     link: 'https://prettier.io/docs/',
+  },
+  {
+    name: 'MDN Web Docs',
+    category: 'Reference',
+    description: 'The main reference for HTML, CSS and JavaScript.',
+    link: 'https://developer.mozilla.org/',
+  },
+  {
+    name: 'Can I use',
+    category: 'Reference',
+    description: 'Check which browsers support a web feature.',
+    link: 'https://caniuse.com/',
+  },
+  {
+    name: 'DevDocs',
+    category: 'Reference',
+    description: 'Many API docs in one fast, searchable page.',
+    link: 'https://devdocs.io/',
   },
   {
     name: 'JavaScript.info',
     category: 'Tutorials',
+    description: 'A modern JavaScript tutorial from basics to advanced.',
     link: 'https://javascript.info/',
   },
   {
     name: 'freeCodeCamp',
     category: 'Tutorials',
+    description: 'Free interactive courses with hands-on projects.',
     link: 'https://www.freecodecamp.org/learn/',
   },
-  { name: 'Can I use', category: 'Tools', link: 'https://caniuse.com/' },
+  {
+    name: 'web.dev Learn',
+    category: 'Tutorials',
+    description: 'Courses on CSS, accessibility, performance and more.',
+    link: 'https://web.dev/learn',
+  },
   {
     name: 'Bundlephobia',
     category: 'Tools',
+    description: 'See how much an npm package adds to your bundle.',
     link: 'https://bundlephobia.com/',
+  },
+  {
+    name: 'Regex101',
+    category: 'Tools',
+    description: 'Build and test regular expressions with explanations.',
+    link: 'https://regex101.com/',
   },
 ]
 
-// Every category once, in the order it first appears (Set removes duplicates)
-const categories = [...new Set(resources.map((resource) => resource.category))]
-
-// Build the page layout once
-const app = document.querySelector('#app')
-
-app.innerHTML = `
-  <header class="header">
-    <h1>Developer Dashboard</h1>
-    <p>Quick links to the docs, tutorials and tools I use most.</p>
-  </header>
-
-  <section class="controls" aria-label="Search and filter resources">
-    <div class="control">
-      <label for="search">Search by name</label>
-      <input id="search" type="search" placeholder="e.g. Vite" autocomplete="off" />
-    </div>
-    <div class="control">
-      <label for="category">Category</label>
-      <select id="category">
-        <option value="All">All</option>
-        ${categories.map((category) => `<option value="${category}">${category}</option>`).join('')}
-      </select>
-    </div>
-  </section>
-
-  <p id="count" class="count" aria-live="polite"></p>
-  <ul id="resource-list" class="grid"></ul>
-`
-
+// Elements from index.html
 const searchInput = document.querySelector('#search')
-const categorySelect = document.querySelector('#category')
+const filterButtons = document.querySelectorAll('.chip')
 const countText = document.querySelector('#count')
 const resourceList = document.querySelector('#resource-list')
+
+// The category chosen with the filter buttons ('All' at the start)
+let selectedCategory = 'All'
 
 // Return only the resources that match BOTH the search text and the category
 function getFilteredResources() {
   const searchText = searchInput.value.trim().toLowerCase()
-  const selectedCategory = categorySelect.value
 
   return resources.filter((resource) => {
     const matchesName = resource.name.toLowerCase().includes(searchText)
@@ -105,7 +102,8 @@ function renderResources(list) {
   if (list.length === 0) {
     resourceList.innerHTML = `
       <li class="empty">
-        No resources match your search. Try another name or choose "All".
+        <p class="empty-title">No resources found</p>
+        <p>Try another name or choose the "All" category.</p>
       </li>
     `
     return
@@ -115,10 +113,14 @@ function renderResources(list) {
     .map(
       (resource) => `
         <li class="card">
+          <div class="card-top">
+            <span class="avatar" aria-hidden="true">${resource.name.charAt(0)}</span>
+            <span class="badge badge-${resource.category.toLowerCase()}">${resource.category}</span>
+          </div>
           <h2>${resource.name}</h2>
-          <span class="badge">${resource.category}</span>
+          <p>${resource.description}</p>
           <a href="${resource.link}" target="_blank" rel="noopener noreferrer">
-            Visit site
+            Open ${resource.name} <span aria-hidden="true">&rarr;</span>
           </a>
         </li>
       `
@@ -131,6 +133,14 @@ function updateCount(shownCount) {
   countText.textContent = `Showing ${shownCount} of ${resources.length} resources`
 }
 
+// Mark the clicked filter button as active and all the others as inactive
+function setActiveButton(activeButton) {
+  filterButtons.forEach((button) => {
+    const isActive = button === activeButton
+    button.setAttribute('aria-pressed', String(isActive))
+  })
+}
+
 // Run the filter and refresh both the cards and the count
 function updateDashboard() {
   const filtered = getFilteredResources()
@@ -138,9 +148,17 @@ function updateDashboard() {
   updateCount(filtered.length)
 }
 
-// 'input' fires on every key press, 'change' fires when a new option is picked
+// 'input' fires on every key press in the search box
 searchInput.addEventListener('input', updateDashboard)
-categorySelect.addEventListener('change', updateDashboard)
+
+// Each filter button stores its category in a data-category attribute
+filterButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    selectedCategory = button.dataset.category
+    setActiveButton(button)
+    updateDashboard()
+  })
+})
 
 // First render when the page loads
 updateDashboard()
