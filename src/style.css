@@ -144,6 +144,7 @@ body {
 
 /* Shown when no resource matches the search and filter */
 .empty {
+  grid-column: 1 / -1; /* span the full width of the grid */
   padding: 40px 16px;
   text-align: center;
   color: var(--muted);

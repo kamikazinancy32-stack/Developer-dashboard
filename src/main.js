@@ -52,6 +52,9 @@ const resources = [
   },
 ]
 
+// Every category once, in the order it first appears (Set removes duplicates)
+const categories = [...new Set(resources.map((resource) => resource.category))]
+
 // Build the page layout once
 const app = document.querySelector('#app')
 
@@ -61,13 +64,53 @@ app.innerHTML = `
     <p>Quick links to the docs, tutorials and tools I use most.</p>
   </header>
 
+  <section class="controls" aria-label="Search and filter resources">
+    <div class="control">
+      <label for="search">Search by name</label>
+      <input id="search" type="search" placeholder="e.g. Vite" autocomplete="off" />
+    </div>
+    <div class="control">
+      <label for="category">Category</label>
+      <select id="category">
+        <option value="All">All</option>
+        ${categories.map((category) => `<option value="${category}">${category}</option>`).join('')}
+      </select>
+    </div>
+  </section>
+
+  <p id="count" class="count" aria-live="polite"></p>
   <ul id="resource-list" class="grid"></ul>
 `
 
+const searchInput = document.querySelector('#search')
+const categorySelect = document.querySelector('#category')
+const countText = document.querySelector('#count')
 const resourceList = document.querySelector('#resource-list')
+
+// Return only the resources that match BOTH the search text and the category
+function getFilteredResources() {
+  const searchText = searchInput.value.trim().toLowerCase()
+  const selectedCategory = categorySelect.value
+
+  return resources.filter((resource) => {
+    const matchesName = resource.name.toLowerCase().includes(searchText)
+    const matchesCategory =
+      selectedCategory === 'All' || resource.category === selectedCategory
+    return matchesName && matchesCategory
+  })
+}
 
 // Turn a list of resources into cards and put them on the page
 function renderResources(list) {
+  if (list.length === 0) {
+    resourceList.innerHTML = `
+      <li class="empty">
+        No resources match your search. Try another name or choose "All".
+      </li>
+    `
+    return
+  }
+
   resourceList.innerHTML = list
     .map(
       (resource) => `
@@ -83,4 +126,21 @@ function renderResources(list) {
     .join('')
 }
 
-renderResources(resources)
+// Show how many resources are visible, e.g. "Showing 4 of 12 resources"
+function updateCount(shownCount) {
+  countText.textContent = `Showing ${shownCount} of ${resources.length} resources`
+}
+
+// Run the filter and refresh both the cards and the count
+function updateDashboard() {
+  const filtered = getFilteredResources()
+  renderResources(filtered)
+  updateCount(filtered.length)
+}
+
+// 'input' fires on every key press, 'change' fires when a new option is picked
+searchInput.addEventListener('input', updateDashboard)
+categorySelect.addEventListener('change', updateDashboard)
+
+// First render when the page loads
+updateDashboard()
