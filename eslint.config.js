@@ -1,5 +1,6 @@
 import js from '@eslint/js'
 import globals from 'globals'
+import eslintConfigPrettier from 'eslint-config-prettier'
 
 export default [
   // Never lint the build output
@@ -20,4 +21,7 @@ export default [
       eqeqeq: 'warn',
     },
   },
+
+  // Must be last: turns off ESLint rules that clash with Prettier formatting
+  eslintConfigPrettier,
 ]
