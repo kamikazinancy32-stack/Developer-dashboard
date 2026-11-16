@@ -64,6 +64,7 @@ Developer dashboard/
 ├── src/
 │   ├── main.js            Resources array, page layout, search/filter logic
 │   └── style.css          Dashboard styles, light and dark mode
+├── .gitattributes         Forces LF line endings so Prettier passes on Windows too
 ├── .gitignore             Keeps node_modules and dist out of Git
 ├── .prettierignore        Files Prettier should skip
 ├── .prettierrc            Prettier style settings
