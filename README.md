@@ -93,11 +93,11 @@ Prettier found two resource objects longer than 80 characters and split them ove
 
 ## Features
 
-- A `resources` array of 12 objects (`name`, `category`, `link` and more) rendered as cards with template literals.
-- Search by name or tag, plus category filters (Frontend, Backend, DevOps, Tools, Learning) that work together.
+- A `resources` array of 29 real learning links (`name`, `category`, `link` and more) rendered as cards with template literals. Each card shows the site address, for example `developer.mozilla.org`.
+- Search by name or tag, plus category filters (Frontend, Backend, DevOps, Tools, QA, Learning) that work together.
 - Bookmarks saved in `localStorage`, with a Bookmarks view in the sidebar.
 - Light and dark theme toggle.
-- Results count ("Showing 3 of 12") and a message when nothing matches.
+- Results count ("Showing 6 of 29") and a message when nothing matches.
 - Responsive layout and accessible labels, `aria-pressed` buttons and focus outlines.
 
 ## Deployment
@@ -110,21 +110,21 @@ Prettier found two resource objects longer than 80 characters and split them ove
 
 ```text
 ✓ 6 modules transformed.
-dist/index.html                 11.03 kB │ gzip: 2.30 kB
-dist/assets/index-BgRgxlTs.css   7.98 kB │ gzip: 2.26 kB
-dist/assets/index-C9tLqcYb.js    6.19 kB │ gzip: 2.44 kB
-✓ built in 446ms
+dist/index.html                 11.24 kB │ gzip: 2.31 kB
+dist/assets/index-Cu95Eaq3.css   8.12 kB │ gzip: 2.29 kB
+dist/assets/index-B_aIBI8K.js    9.24 kB │ gzip: 3.41 kB
+✓ built in 1.01s
 ```
 
 | Source                         | Source size  | Built file                  | Built size   | Change      |
 | ------------------------------ | ------------ | --------------------------- | ------------ | ----------- |
-| `src/main.js` + `src/theme.js` | 9,954 bytes  | `assets/index-C9tLqcYb.js`  | 6,193 bytes  | 38% smaller |
-| `src/style.css`                | 11,051 bytes | `assets/index-BgRgxlTs.css` | 7,987 bytes  | 28% smaller |
-| `index.html`                   | 10,935 bytes | `index.html`                | 11,037 bytes | 1% larger   |
+| `src/main.js` + `src/theme.js` | 14,055 bytes | `assets/index-B_aIBI8K.js`  | 9,249 bytes  | 34% smaller |
+| `src/style.css`                | 11,283 bytes | `assets/index-Cu95Eaq3.css` | 8,128 bytes  | 28% smaller |
+| `index.html`                   | 11,147 bytes | `index.html`                | 11,249 bytes | 1% larger   |
 
 - **Bundling:** my two JS modules became one file, and the CSS became one file.
 - **Minification:** comments and spaces are removed and variable names are shortened.
-- **Hashed file names:** names like `index-C9tLqcYb.js` change when the content changes, so browsers can cache files safely (cache busting).
+- **Hashed file names:** names like `index-B_aIBI8K.js` change when the content changes, so browsers can cache files safely (cache busting).
 - `index.html` grew slightly because Vite adds the script and stylesheet tags and does not minify HTML.
 
 ## Reflection
