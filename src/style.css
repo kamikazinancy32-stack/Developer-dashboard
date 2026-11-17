@@ -455,12 +455,12 @@ a {
   color: var(--muted);
 }
 
-.card-bottom {
+.card-tags {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: auto;
-  padding-top: 12px;
+  padding-top: 8px;
 }
 
 .tag {
@@ -476,18 +476,29 @@ a {
   color: var(--primary);
 }
 
+/* The real web address, e.g. "developer.mozilla.org" */
 .card-link {
-  display: grid;
-  place-items: center;
-  margin-left: auto;
-  padding: 6px;
-  border-radius: 8px;
-  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  color: var(--primary);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.card-link .icon {
+  width: 16px;
+  height: 16px;
 }
 
 .card-link:hover {
-  background: var(--surface-2);
-  color: var(--primary);
+  text-decoration: underline;
 }
 
 /* Shown when no card matches */

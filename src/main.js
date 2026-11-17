@@ -3,10 +3,11 @@ import { setupThemeToggle } from './theme.js'
 
 // The developer resources shown on the dashboard
 const resources = [
+  // ---------- Frontend ----------
   {
     name: 'MDN Web Docs',
     category: 'Frontend',
-    tag: 'Web',
+    tag: 'HTML, CSS, JS',
     short: 'mdn',
     description: 'Up-to-date documentation for HTML, CSS and JavaScript.',
     link: 'https://developer.mozilla.org/',
@@ -16,26 +17,69 @@ const resources = [
     category: 'Frontend',
     tag: 'React',
     short: 'jsx',
-    description:
-      'Learn components, hooks, state and more from the official docs.',
+    description: 'Learn components, hooks and state from the official docs.',
     link: 'https://react.dev/learn',
   },
+  {
+    name: 'Vue Guide',
+    category: 'Frontend',
+    tag: 'Vue',
+    short: 'vue',
+    description: 'The official guide to building apps with Vue.',
+    link: 'https://vuejs.org/guide/introduction.html',
+  },
+  {
+    name: 'TypeScript Handbook',
+    category: 'Frontend',
+    tag: 'TypeScript',
+    short: 'ts',
+    description: 'Add types to JavaScript and catch bugs before they run.',
+    link: 'https://www.typescriptlang.org/docs/handbook/intro.html',
+  },
+  {
+    name: 'Flexbox Guide',
+    category: 'Frontend',
+    tag: 'CSS',
+    short: 'css',
+    description: 'A complete visual guide to CSS Flexbox from CSS-Tricks.',
+    link: 'https://css-tricks.com/snippets/css/a-guide-to-flexbox/',
+  },
+
+  // ---------- Backend ----------
   {
     name: 'Node.js Docs',
     category: 'Backend',
     tag: 'Node.js',
     short: 'node',
-    description: 'The API reference for building server-side JavaScript apps.',
+    description: 'The API reference for server-side JavaScript.',
     link: 'https://nodejs.org/docs/latest/api/',
+  },
+  {
+    name: 'Express Guide',
+    category: 'Backend',
+    tag: 'APIs',
+    short: 'exp',
+    description: 'Build web servers and REST APIs with Express.',
+    link: 'https://expressjs.com/en/starter/installing.html',
   },
   {
     name: 'PostgreSQL Docs',
     category: 'Backend',
-    tag: 'Database',
+    tag: 'SQL',
     short: 'sql',
     description: 'Reference and tutorials for the open source SQL database.',
     link: 'https://www.postgresql.org/docs/',
   },
+  {
+    name: 'MongoDB Docs',
+    category: 'Backend',
+    tag: 'NoSQL',
+    short: 'mdb',
+    description: 'Store and query JSON-like documents with MongoDB.',
+    link: 'https://www.mongodb.com/docs/',
+  },
+
+  // ---------- DevOps ----------
   {
     name: 'Docker Docs',
     category: 'DevOps',
@@ -49,9 +93,77 @@ const resources = [
     category: 'DevOps',
     tag: 'CI/CD',
     short: 'ci',
-    description: 'Automate tests, builds and deployments from your repository.',
+    description: 'Automate tests, builds and deployments from your repo.',
     link: 'https://docs.github.com/actions',
   },
+  {
+    name: 'Kubernetes Docs',
+    category: 'DevOps',
+    tag: 'Orchestration',
+    short: 'k8s',
+    description: 'Deploy, scale and manage containers in production.',
+    link: 'https://kubernetes.io/docs/home/',
+  },
+  {
+    name: 'Terraform Docs',
+    category: 'DevOps',
+    tag: 'Infrastructure',
+    short: 'tf',
+    description: 'Describe cloud infrastructure as code and version it.',
+    link: 'https://developer.hashicorp.com/terraform/docs',
+  },
+
+  // ---------- QA / Testing ----------
+  {
+    name: 'Jest',
+    category: 'QA',
+    tag: 'Unit testing',
+    short: 'jest',
+    description: 'A JavaScript testing framework with a simple API.',
+    link: 'https://jestjs.io/docs/getting-started',
+  },
+  {
+    name: 'Vitest',
+    category: 'QA',
+    tag: 'Unit testing',
+    short: 'vt',
+    description: 'A fast test runner that works with Vite projects.',
+    link: 'https://vitest.dev/guide/',
+  },
+  {
+    name: 'Testing Library',
+    category: 'QA',
+    tag: 'Component testing',
+    short: 'rtl',
+    description: 'Test UI components the way users interact with them.',
+    link: 'https://testing-library.com/docs/',
+  },
+  {
+    name: 'Playwright',
+    category: 'QA',
+    tag: 'End-to-end',
+    short: 'pw',
+    description: 'Automate real browsers for reliable end-to-end tests.',
+    link: 'https://playwright.dev/docs/intro',
+  },
+  {
+    name: 'Cypress',
+    category: 'QA',
+    tag: 'End-to-end',
+    short: 'cy',
+    description: 'Write and debug end-to-end tests in the browser.',
+    link: 'https://docs.cypress.io/',
+  },
+  {
+    name: 'Selenium',
+    category: 'QA',
+    tag: 'Automation',
+    short: 'sel',
+    description: 'Browser automation used across many languages.',
+    link: 'https://www.selenium.dev/documentation/',
+  },
+
+  // ---------- Tools ----------
   {
     name: 'Vite Guide',
     category: 'Tools',
@@ -77,11 +189,29 @@ const resources = [
     link: 'https://prettier.io/docs/',
   },
   {
+    name: 'Git Docs',
+    category: 'Tools',
+    tag: 'Version control',
+    short: 'git',
+    description: 'The Git reference manual and the free Pro Git book.',
+    link: 'https://git-scm.com/doc',
+  },
+  {
+    name: 'Chrome DevTools',
+    category: 'Tools',
+    tag: 'Debugging',
+    short: 'dt',
+    description: 'Inspect, debug and profile pages in the browser.',
+    link: 'https://developer.chrome.com/docs/devtools',
+  },
+
+  // ---------- Learning ----------
+  {
     name: 'JavaScript.info',
     category: 'Learning',
     tag: 'JavaScript',
     short: 'js',
-    description: 'A modern JavaScript tutorial, from the basics to advanced.',
+    description: 'A modern JavaScript tutorial, from basics to advanced.',
     link: 'https://javascript.info/',
   },
   {
@@ -93,12 +223,28 @@ const resources = [
     link: 'https://www.freecodecamp.org/learn/',
   },
   {
+    name: 'The Odin Project',
+    category: 'Learning',
+    tag: 'Full stack',
+    short: 'odin',
+    description: 'A free full stack curriculum built around real projects.',
+    link: 'https://www.theodinproject.com/',
+  },
+  {
     name: 'web.dev Learn',
     category: 'Learning',
     tag: 'Web',
     short: 'web',
     description: 'Courses on CSS, accessibility, performance and more.',
     link: 'https://web.dev/learn',
+  },
+  {
+    name: 'roadmap.sh',
+    category: 'Learning',
+    tag: 'Roadmaps',
+    short: 'map',
+    description: 'Step-by-step roadmaps for frontend, backend, DevOps and QA.',
+    link: 'https://roadmap.sh/',
   },
 ]
 
@@ -173,6 +319,11 @@ function getEmptyMessage() {
   return 'No resources match your search. Try another word or choose "All".'
 }
 
+// Turn a full link into a short address, e.g. "developer.mozilla.org"
+function getDomain(link) {
+  return new URL(link).hostname.replace('www.', '')
+}
+
 // Turn a list of resources into cards and put them on the page
 function renderResources(list) {
   if (list.length === 0) {
@@ -206,23 +357,24 @@ function renderResources(list) {
           </div>
           <h3>${resource.name}</h3>
           <p class="card-desc">${resource.description}</p>
-          <div class="card-bottom">
+          <div class="card-tags">
             <span class="tag tag-category">${resource.category}</span>
             <span class="tag">${resource.tag}</span>
-            <a
-              class="card-link"
-              href="${resource.link}"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Open ${resource.name} in a new tab"
-            >
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M14 4h6v6" />
-                <path d="M20 4 10 14" />
-                <path d="M19 14v6H4V5h6" />
-              </svg>
-            </a>
           </div>
+          <a
+            class="card-link"
+            href="${resource.link}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ${getDomain(resource.link)}
+            <span class="visually-hidden">(opens in a new tab)</span>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 4h6v6" />
+              <path d="M20 4 10 14" />
+              <path d="M19 14v6H4V5h6" />
+            </svg>
+          </a>
         </li>
       `
     })
